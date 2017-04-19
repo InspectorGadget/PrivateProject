@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <meta charset="UTF-8">
         <title> Test </title>
         <link rel="stylesheet" href="bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             
             input {
