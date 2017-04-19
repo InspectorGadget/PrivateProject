@@ -32,6 +32,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <meta charset="UTF-8">
         <title> Test </title>
         <link rel="stylesheet" href="bootstrap.min.css">
+        <style>
+            
+            input {
+                text-align: center;
+            }
+            
+        </style>
     </head>
     
     <body>
@@ -42,7 +49,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 
                 <div class="navbar-header">
                     
-                    <a class="navbar-brand" href="#"> RTGNetwork.tk </a>
+                    <a class="navbar-brand" href="#"> RTGNetwork </a>
                     
                 </div>
                   
@@ -56,7 +63,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 
                 <form method="POST" action="redirect.php">
                     
-                    <input type="text" name="mass">
+                    <p> Your Full Name: </p>
+                    <input type="text" name="name" placeholder="Input here">
+                    
+                    <br><br>
+                    
+                    <p> Your total mass: </p>
+                    <input type="text" name="mass" placeholder="Input here">
+                    
+                    <br><br>
                     
                     <button type="submit" class="btn-default"> Click me </button>
                     

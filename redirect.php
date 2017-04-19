@@ -29,14 +29,43 @@ include 'Script.php';
  * 
  */
 
+$name = $_POST['name'];
 $mass = $_POST['mass'];
 
 if (!is_numeric($mass)) {
     header ('Location: index.php');
 } else {
     
+    if ($mass > 1000) {
     
-    $obj = new Script();
-    $obj->checkMass("ii", $mass);
+        $obj = new Script($name, $mass);
+    
+    } else {
+        
+        $upper = strtoupper($name);
+        
+        $ch = curl_init();
+        
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => "https://discordapp.com/api/webhooks/302431612744892416/MHlAN1r49C537cH5IrRoGdNm0dJr5PM12BcHrkH923MiMVBRgSMWe4-F6_HVr65ZvAtE",
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POSTFIELDS => json_encode(array(
+                "content" => "An error occured to $upper",
+                "username" => "RTGTheBot",
+                "avatar_url" => "http://benjiflaming.com/wp-content/uploads/2010/06/white.png"
+            ))
+        ));
+        
+        $res = curl_exec($ch);
+        
+        if ($res === false) {
+            echo "An error occured on our side!";
+        } else {
+            echo "Make sure your mass is more than 1000 Gram, anything below than that will trigger this error. Your error has been recorded and published on Discord!";
+        }
+        
+    }
     
 }

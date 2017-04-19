@@ -30,17 +30,33 @@
 
 class Script {
     
-    public $tempsave = [];
+    public $username;
+    public $mass;
     
-    public function checkMass(string $victim, int $mass) {
+    public function __construct($username, $mass) {
         
-        if ($mass > 1000) {
-            $this->tempsave[strtolower($victim)] = $victim . ":" . $mass;
-            echo "saved";
-            $file = "saves.yml";
-            file_put_contents($file, $this->tempsave);
+        $upper = strtoupper($username);
+        
+        $ch = curl_init();
+        
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => "https://discordapp.com/api/webhooks/302431612744892416/MHlAN1r49C537cH5IrRoGdNm0dJr5PM12BcHrkH923MiMVBRgSMWe4-F6_HVr65ZvAtE",
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POSTFIELDS => json_encode(array(
+                "content" => "$upper has a total mass of $mass",
+                "username" => "RTGTheBot",
+                "avatar_url" => "http://benjiflaming.com/wp-content/uploads/2010/06/white.png"
+            ))
+        ));
+        
+        $res = curl_exec($ch);
+        
+        if ($res === false) {
+            echo "Error:" . curl_error($ch);
         } else {
-            echo "Mass isn't saved!";
+            echo "Executed!";
         }
         
     }
